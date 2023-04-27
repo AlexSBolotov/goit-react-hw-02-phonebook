@@ -1,4 +1,4 @@
-// import s from './ContactForm.module.css'
+import s from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -15,9 +15,9 @@ export default class ContactForm extends Component {
   };
   onFormSubmit = e => {
     e.preventDefault();
-    console.log(this.state.name);
+    // console.log(this.state.name);
     this.props.isNamesDublicated(this.state.name)
-      ? alert('hdgjsfkllkdsjafh')
+      ? alert(`${this.state.name} is already in contacts.`)
       : this.props.addContact({ ...this.state, id: nanoid() });
 
     this.setState({
@@ -27,7 +27,7 @@ export default class ContactForm extends Component {
   };
   render() {
     return (
-      <form action="" onSubmit={this.onFormSubmit}>
+      <form className={s.wrapper} action="" onSubmit={this.onFormSubmit}>
         <label htmlFor="name">Name</label>
         <input
           id="name"
@@ -50,7 +50,9 @@ export default class ContactForm extends Component {
           value={this.state.number}
           onChange={this.onInputChange}
         />
-        <button type="submit">Add contact</button>
+        <button className={s.button} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

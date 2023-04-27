@@ -1,11 +1,12 @@
 import ContactForm from './ContactForm/ContactForm';
+import { StartState } from 'const/const';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import { Component } from 'react';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [...StartState],
     filter: '',
   };
   removeContact = id => {

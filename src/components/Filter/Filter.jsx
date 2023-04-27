@@ -1,11 +1,12 @@
-// import s from './Filter.module.css'
+import s from './Filter.module.css';
 import PropTypes from 'prop-types';
 
 export default function Filter({ onFilterInputChange }) {
   return (
-    <div>
-      <label htmlFor="">Find contacts by name</label>
+    <div className={s.wrapper}>
+      <label htmlFor="filter">Find contacts by name</label>
       <input
+        id="filter"
         type="text"
         name="filter"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
