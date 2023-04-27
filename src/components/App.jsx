@@ -33,8 +33,6 @@ export class App extends Component {
         />
 
         <h2>Contacts</h2>
-        {/* <Filter />
-        <ContactList /> */}
       </main>
     );
   }
