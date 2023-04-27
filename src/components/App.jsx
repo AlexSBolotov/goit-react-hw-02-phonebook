@@ -1,5 +1,5 @@
 import ContactForm from './ContactForm/ContactForm';
-// import Filter from './Filter/Filter';
+import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import { Component } from 'react';
 
@@ -8,33 +8,44 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
-
+  removeContact = id => {
+    console.log(id);
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+  onFilterInputChange = name => {
+    this.setState({ filter: name });
+  };
   isNamesDublicated = name =>
     this.state.contacts.some(
       el => el.name.toLowerCase() === name.toLowerCase()
     );
-  onFormSubmit = data => {
-    console.log(data.name);
-
+  addContact = data => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, data],
     }));
-
-    console.log(this.state.contacts);
   };
 
   render() {
+    const { filter, contacts } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
     return (
       <main>
         <h1>Phonebook</h1>
         <ContactForm
           isNamesDublicated={this.isNamesDublicated}
-          submitCallback={this.onFormSubmit}
+          addContact={this.addContact}
         />
 
         <h2>Contacts</h2>
-        {/* <Filter /> */}
-        <ContactList contacts={this.state.contacts} />
+        <Filter onFilterInputChange={this.onFilterInputChange} />
+        <ContactList
+          contacts={filteredContacts}
+          removeContact={this.removeContact}
+        />
       </main>
     );
   }

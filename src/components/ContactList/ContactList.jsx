@@ -1,14 +1,17 @@
 // import s from './ContactList.module.css'
 import PropTypes from 'prop-types';
 
-export default function ContactList({ contacts }) {
+export default function ContactList({ contacts = [], removeContact }) {
   return (
     <ul>
-      {contacts.map(contact => (
-        <li key={contact.id}>
+      {contacts.map(({ id, name, number }) => (
+        <li key={id}>
           <span>
-            {contact.name}: {contact.number}
+            {name}: {number}
           </span>
+          <button type="button" onClick={() => removeContact(id)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
@@ -20,6 +23,7 @@ ContactList.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
+      removeContact: PropTypes.func,
     })
   ),
 };

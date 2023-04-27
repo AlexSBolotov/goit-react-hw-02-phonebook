@@ -1,6 +1,7 @@
 // import s from './ContactForm.module.css'
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ContactForm extends Component {
   state = {
@@ -17,7 +18,7 @@ export default class ContactForm extends Component {
     console.log(this.state.name);
     this.props.isNamesDublicated(this.state.name)
       ? alert('hdgjsfkllkdsjafh')
-      : this.props.submitCallback({ ...this.state, id: nanoid() });
+      : this.props.addContact({ ...this.state, id: nanoid() });
 
     this.setState({
       name: '',
@@ -27,8 +28,9 @@ export default class ContactForm extends Component {
   render() {
     return (
       <form action="" onSubmit={this.onFormSubmit}>
-        <label htmlFor="">Name</label>
+        <label htmlFor="name">Name</label>
         <input
+          id="name"
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -37,12 +39,14 @@ export default class ContactForm extends Component {
           value={this.state.name}
           onChange={this.onInputChange}
         />
-        <label htmlFor="">Number</label>
+        <label htmlFor="number">Number</label>
         <input
+          id="number"
           type="text"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
           value={this.state.number}
           onChange={this.onInputChange}
         />
@@ -51,3 +55,7 @@ export default class ContactForm extends Component {
     );
   }
 }
+ContactForm.propTypes = {
+  isNamesDublicated: PropTypes.func,
+  addContact: PropTypes.func,
+};
