@@ -1,5 +1,4 @@
 import s from './ContactForm.module.css';
-import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -27,7 +26,7 @@ export default class ContactForm extends Component {
   // };
   onFormSubmit = e => {
     e.preventDefault();
-    this.props.addContact({ ...this.state, id: nanoid() });
+    this.props.addContact(this.state);
     this.setState({
       name: '',
       number: '',
@@ -67,6 +66,5 @@ export default class ContactForm extends Component {
   }
 }
 ContactForm.propTypes = {
-  isNamesDublicated: PropTypes.func,
   addContact: PropTypes.func,
 };
