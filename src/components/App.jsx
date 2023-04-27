@@ -10,7 +10,6 @@ export class App extends Component {
     filter: '',
   };
   removeContact = id => {
-    console.log(id);
     this.setState(prev => ({
       contacts: prev.contacts.filter(contact => contact.id !== id),
     }));
