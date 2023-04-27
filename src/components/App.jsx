@@ -9,10 +9,29 @@ export class App extends Component {
     contacts: [...StartState],
     filter: '',
   };
+  // addContact = data => {
+  //   this.setState(prevState => ({
+  //     contacts: [...prevState.contacts, data],
+  //   }));
+  // };
+
+  addContact = data => {
+    this.isNamesDublicated(data.name)
+      ? alert(`${data.name} is already in contacts.`)
+      : this.setState(prevState => ({
+          contacts: [...prevState.contacts, data],
+        }));
+  };
   removeContact = id => {
     this.setState(prev => ({
       contacts: prev.contacts.filter(contact => contact.id !== id),
     }));
+  };
+  filterContacts = () => {
+    const { filter, contacts } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
   };
   onFilterInputChange = name => {
     this.setState({ filter: name });
@@ -21,17 +40,9 @@ export class App extends Component {
     this.state.contacts.some(
       el => el.name.toLowerCase() === name.toLowerCase()
     );
-  addContact = data => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, data],
-    }));
-  };
 
   render() {
-    const { filter, contacts } = this.state;
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    const filteredContacts = this.filterContacts();
     return (
       <main>
         <h1>Phonebook</h1>

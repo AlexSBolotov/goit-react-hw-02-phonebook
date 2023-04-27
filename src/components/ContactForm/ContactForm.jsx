@@ -13,18 +13,27 @@ export default class ContactForm extends Component {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
   };
+  // onFormSubmit = e => {
+  //   e.preventDefault();
+  //   // console.log(this.state.name);
+  //   this.props.isNamesDublicated(this.state.name)
+  //     ? alert(`${this.state.name} is already in contacts.`)
+  //     : this.props.addContact({ ...this.state, id: nanoid() });
+
+  //   this.setState({
+  //     name: '',
+  //     number: '',
+  //   });
+  // };
   onFormSubmit = e => {
     e.preventDefault();
-    // console.log(this.state.name);
-    this.props.isNamesDublicated(this.state.name)
-      ? alert(`${this.state.name} is already in contacts.`)
-      : this.props.addContact({ ...this.state, id: nanoid() });
-
+    this.props.addContact({ ...this.state, id: nanoid() });
     this.setState({
       name: '',
       number: '',
     });
   };
+
   render() {
     return (
       <form className={s.wrapper} action="" onSubmit={this.onFormSubmit}>
