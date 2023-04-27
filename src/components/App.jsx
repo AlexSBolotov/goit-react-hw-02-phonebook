@@ -1,5 +1,5 @@
 import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
+// import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import { Component } from 'react';
 
@@ -33,8 +33,8 @@ export class App extends Component {
         />
 
         <h2>Contacts</h2>
-        {/* <Filter />
-        <ContactList /> */}
+        {/* <Filter /> */}
+        <ContactList contacts={this.state.contacts} />
       </main>
     );
   }
